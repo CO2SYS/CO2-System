@@ -142,7 +142,7 @@ function [derivatives, headers, units, headers_err, units_err] = ...
     % BASELINE:
     % --------
     
-    carb = CO2SYSn(PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+    carb = CO2SYS(PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
     % Compute [H+] in µmol/KgSW
     if (ndims(carb) == 2)
         Hin = 10.^(-carb(:,3)) * 1.e6;
@@ -372,7 +372,7 @@ function [derivatives, headers, units, headers_err, units_err] = ...
         PertK = upper(VARID);
         Perturb = -perturbation;
     end
-    cdel1 = CO2SYSn ( ...
+    cdel1 = CO2SYS ( ...
         PAR11,PAR21,PAR1TYPE,PAR2TYPE,SAL1,TEMP1,TEMPOUT,PRESIN,PRESOUT,SI1,PO41,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
     % Compute [H+]
     if (ndims(cdel1) == 2)
@@ -391,7 +391,7 @@ function [derivatives, headers, units, headers_err, units_err] = ...
         PertK = upper(VARID);
         Perturb = perturbation;
     end
-    cdel2 = CO2SYSn ( ...
+    cdel2 = CO2SYS ( ...
         PAR12,PAR22,PAR1TYPE,PAR2TYPE,SAL2,TEMP2,TEMPOUT,PRESIN,PRESOUT,SI2,PO42,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
     % Compute [H+]
     if (ndims(cdel2) == 2)
