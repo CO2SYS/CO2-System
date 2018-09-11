@@ -457,9 +457,12 @@ function [derivatives, headers, units, headers_err, units_err] = ...
         if PAR1TYPE(1) <= 3 % TAlk, TCO2 or pH
             % By design of CO2sys, PARTYPE is equal to column number
             col_number = PAR1TYPE(1);
-        else
+        elseif PAR1TYPE(1) <= 5 % pCO2 or fCO2
             % Because there is an extra column: [H+]
             col_number = PAR1TYPE(1) + 1;
+        else % CO3
+            % Because there is another extra column: [HCO3-]
+            col_number = PAR1TYPE(1) + 2;
         end
         % Exclude input parameters PAR1
         A = (keep ~= col_number);
@@ -473,9 +476,12 @@ function [derivatives, headers, units, headers_err, units_err] = ...
         if PAR2TYPE(1) <= 3 % TAlk, TCO2 or pH
             % By design of CO2sys, PARTYPE is equal to column number
             col_number = PAR2TYPE(1);
-        else
+        elseif PAR2TYPE(1) <= 5 % pCO2 or fCO2
             % Because there is an extra column: [H+]
             col_number = PAR2TYPE(1) + 1;
+        else % CO3
+            % Because there is another extra column: [HCO3-]
+            col_number = PAR2TYPE(1) + 2;
         end
         % Exclude input parameters PAR2
         A = (keep ~= col_number);
