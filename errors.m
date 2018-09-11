@@ -273,7 +273,7 @@ function [total_error, headers, units] = ...
     % Contribution of PAR1 to squared standard error
     if (any (ePAR1 ~= 0.0))
         % Compute sensitivities (partial derivatives)
-        [deriv1, headers, units, headers_err, units_err] = derivnumn ('PAR1',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+        [deriv1, headers, units, headers_err, units_err] = derivnum ('PAR1',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
         %err = deriv1 .* ePAR1;
         err = bsxfun(@times,deriv1,ePAR1);
 	%sq_err = err*0. + sq_err;
@@ -284,7 +284,7 @@ function [total_error, headers, units] = ...
     % Contribution of PAR2 to squared standard error
     if (any (ePAR2 ~= 0.0))
         % Compute sensitivities (partial derivatives)
-        [deriv2, headers, units, headers_err, units_err] = derivnumn ('PAR2',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+        [deriv2, headers, units, headers_err, units_err] = derivnum ('PAR2',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
         %err = deriv2 .* ePAR2;
         err = bsxfun(@times,deriv2,ePAR2);
 	%sq_err = err*0. + sq_err;
@@ -310,7 +310,7 @@ function [total_error, headers, units] = ...
     SI_valid = (SI ~= 0) & (eSI ~= 0);
     if (any (SI_valid))
         % Compute sensitivities (partial derivatives)
-        [deriv, headers, units, headers_err, units_err] = derivnumn ('sil',PAR1(SI_valid),PAR2(SI_valid),PAR1TYPE(SI_valid),PAR2TYPE(SI_valid),...
+        [deriv, headers, units, headers_err, units_err] = derivnum ('sil',PAR1(SI_valid),PAR2(SI_valid),PAR1TYPE(SI_valid),PAR2TYPE(SI_valid),...
                    SAL(SI_valid),TEMPIN(SI_valid),TEMPOUT(SI_valid),PRESIN(SI_valid),PRESOUT(SI_valid),...
                    SI(SI_valid),PO4(SI_valid),pHSCALEIN(SI_valid),K1K2CONSTANTS(SI_valid),KSO4CONSTANTS(SI_valid));
         err = bsxfun(@times,deriv,eSI(SI_valid));
@@ -327,7 +327,7 @@ function [total_error, headers, units] = ...
     PO4_valid = (PO4 ~= 0) & (ePO4 ~= 0);
     if (any (PO4_valid))
         % Compute sensitivities (partial derivatives)
-        [deriv, headers, units, headers_err, units_err] = derivnumn ('phos',PAR1(PO4_valid),PAR2(PO4_valid),PAR1TYPE(PO4_valid),PAR2TYPE(PO4_valid),...
+        [deriv, headers, units, headers_err, units_err] = derivnum ('phos',PAR1(PO4_valid),PAR2(PO4_valid),PAR1TYPE(PO4_valid),PAR2TYPE(PO4_valid),...
                    SAL(PO4_valid),TEMPIN(PO4_valid),TEMPOUT(PO4_valid),PRESIN(PO4_valid),PRESOUT(PO4_valid),...
                    SI(PO4_valid),PO4(PO4_valid),pHSCALEIN(PO4_valid),K1K2CONSTANTS(PO4_valid),KSO4CONSTANTS(PO4_valid));
         err = bsxfun(@times,deriv,ePO4(PO4_valid));
@@ -339,7 +339,7 @@ function [total_error, headers, units] = ...
     % Contribution of T (temperature) to squared standard error
     if (any (eTEMP ~= 0.0))
         % Compute sensitivities (partial derivatives)
-        [deriv, headers, units, headers_err, units_err] = derivnumn ('T',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+        [deriv, headers, units, headers_err, units_err] = derivnum ('T',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
         err = bsxfun(@times,deriv,eTEMP);
 	sq_err = err*0. + sq_err;
         sq_err = sq_err + err .* err;
@@ -348,14 +348,14 @@ function [total_error, headers, units] = ...
     % Contribution of S (salinity) to squared standard error
     if (any (eSAL ~= 0.0))
         % Compute sensitivities (partial derivatives)
-        [deriv, headers, units, headers_err, units_err] = derivnumn ('S',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+        [deriv, headers, units, headers_err, units_err] = derivnum ('S',PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
         err = bsxfun(@times,deriv,eSAL);
 	sq_err = err*0. + sq_err;
         sq_err = sq_err + err .* err;
     end
 
     % Calculate dissociation constants
-    data = CO2SYSn (PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+    data = CO2SYS (PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
         
     % Calculate [Ca++]
     % '       Riley, J. P. and Tongudai, M., Chemical Geology 2:263-269, 1967:
@@ -398,7 +398,7 @@ function [total_error, headers, units] = ...
             % compute error on Ki from that on pKi
             eKi = - epK(i) * Ki * log(10);
             % Compute sensitivities (partial derivatives)
-            [deriv, headers, units, headers_err, units_err] = derivnumn (cell2mat(Knames(1,i)),PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
+            [deriv, headers, units, headers_err, units_err] = derivnum (cell2mat(Knames(1,i)),PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
             err = bsxfun(@times, deriv, eKi);
             %disp('deriv = '), disp(deriv);
 	    sq_err = err*0. + sq_err;
@@ -409,7 +409,7 @@ function [total_error, headers, units] = ...
     % Contribution of Boron (total dissoloved boron concentration) to squared standard error
     if (eBt ~= 0)
         % Compute sensitivities (partial derivatives)
-        [deriv, headers, units, headers_err, units_err] = derivnumn ('bor',PAR1,PAR2,PAR1TYPE,PAR2TYPE,...
+        [deriv, headers, units, headers_err, units_err] = derivnum ('bor',PAR1,PAR2,PAR1TYPE,PAR2TYPE,...
                    SAL,TEMPIN,TEMPOUT,PRESIN,PRESOUT,...
                    SI,PO4,pHSCALEIN,K1K2CONSTANTS,KSO4CONSTANTS);
         err = deriv .* eBt  * data(:,79) * 1e-6 ;  % where TB = data(:,79) in umol B/kg
