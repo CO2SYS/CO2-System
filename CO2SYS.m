@@ -1777,7 +1777,7 @@ end % end nested function
 
 function varargout=CalculatefCO2frompHCO3(pHx, CO3x)
 global K0 K1 K2 F
-% ' SUB CalculatefCO2frompHCO3, version 01.0, 3-18, added by J. Sharp
+% ' SUB CalculatefCO2frompHCO3, version 01.0, 8-18, added by J. Sharp
 % ' Inputs: pH, CO3, K0, K1, K2
 % ' Output: fCO2
 % ' This calculates fCO2 from pH and CO3, using K0, K1, and K2.
