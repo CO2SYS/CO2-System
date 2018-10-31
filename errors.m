@@ -25,7 +25,7 @@
 %  [Result,Headers,Units]  = errors(500,    8,5,3,35,25,5,0,4000,15,1,2,0.001,0,0,0,0,'','',0,1,4,1)
 %  [A]                     = errors(2400,2000:10:2400,1,2,35,10,10,0,0,15,2,2,0,0,0,0,'','',0,1,1,4,1)
 %  [A]                     = errors(2400,2200,1,2,0:1:35,0,25,4200,0,15,1,2,2,0,0,0,0,'','',0,1,4,1)
-%  epK = [0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.022];
+%  epK = [0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.02];
 %  eBt = 0.02;
 %  [A, hdr, units]   = errors(2400,2200,1,2,35,0,25,0:100:4200,0,15,1,2,2,0,0,0,0,epK,eBt,0,1,4,1)
 %  
@@ -48,16 +48,16 @@
 %
 %     if epK is empty (= ''), this routine specifies default values.
 %     These default standard errors are :
-%        pK0   :  0.004 
-%        pK1   :  0.015
-%        pK2   :  0.03
+%        pK0   :  0.002 
+%        pK1   :  0.0075
+%        pK2   :  0.015
 %        pKb   :  0.01    boric acid
 %        pKw   :  0.01    water dissociation
 %        pKspa :  0.02    solubility product of Aragonite 
 %        pKspc :  0.02    solubility product of Calcite
 %
 %   * eBt is a scalar real number, fractional relative error (between 0.00 and 1.00)
-%     for TB, where the default is eBt=0.01. It is assumed to be the same
+%     for TB, where the default is eBt=0.02. It is assumed to be the same
 %     for all rows of data.
 %
 % In constrast, ePAR1, ePAR2, eS, eT, ePO4 and eSI, 
@@ -200,7 +200,7 @@ function [total_error, headers, units] = ...
 
     % Default values for epK
     if (isempty(epK))
-        epK = [0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.022];
+        epK = [0.002, 0.0075, 0.015, 0.01, 0.01, 0.02, 0.02];
     else
         % Check validity of epK
         if (length(epK) == 1 && epK == 0)
