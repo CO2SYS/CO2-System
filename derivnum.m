@@ -451,45 +451,6 @@ function [derivatives, headers, units, headers_err, units_err] = ...
     % Initially, keep all headers except 'pHin'
     keep_head =  [1:3 5:21];
 
-    % if all parameter PAR1 are of the same type
-    if all(PAR1TYPE == PAR1TYPE(1))
-        % Determine column number of PAR1
-        if PAR1TYPE(1) <= 3 % TAlk, TCO2 or pH
-            % By design of CO2sys, PARTYPE is equal to column number
-            col_number = PAR1TYPE(1);
-        elseif PAR1TYPE(1) <= 5 % pCO2 or fCO2
-            % Because there is an extra column: [H+]
-            col_number = PAR1TYPE(1) + 1;
-        else % CO3
-            % Because there is another extra column: [HCO3-]
-            col_number = PAR1TYPE(1) + 2;
-        end
-        % Exclude input parameters PAR1
-        A = (keep ~= col_number);
-        keep = keep (A);
-        A = (keep_head ~= col_number);
-        keep_head = keep_head (A);
-    end
-    % if all parameter PAR2 are of the same type
-    if all(PAR2TYPE == PAR2TYPE(1))
-        % Determine column number of PAR1
-        if PAR2TYPE(1) <= 3 % TAlk, TCO2 or pH
-            % By design of CO2sys, PARTYPE is equal to column number
-            col_number = PAR2TYPE(1);
-        elseif PAR2TYPE(1) <= 5 % pCO2 or fCO2
-            % Because there is an extra column: [H+]
-            col_number = PAR2TYPE(1) + 1;
-        else % CO3
-            % Because there is another extra column: [HCO3-]
-            col_number = PAR2TYPE(1) + 2;
-        end
-        % Exclude input parameters PAR2
-        A = (keep ~= col_number);
-        keep = keep (A);
-        A = (keep_head ~= col_number);
-        keep_head = keep_head (A);
-    end
-
     cdel1 = cdel1(:,keep);
     cdel2 = cdel2(:,keep);
     
