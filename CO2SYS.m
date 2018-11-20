@@ -3,7 +3,7 @@ function [DATA,HEADERS,NICEHEADERS]=CO2SYS(PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPI
 %
 % First   CO2SYS.m version: 1.1    (Sep 2011)
 % Second  CO2SYS.m version: 2.0 (20 Dec 2016)
-% Current CO2SYS.m version: 2.1    (Aug 2018)
+% Current CO2SYS.m version: 2.0.1  (Aug 2018)
 %
 % CO2SYS is a MATLAB-version of the original CO2SYS for DOS. 
 % CO2SYS calculates and returns the state of the carbonate system of 
@@ -213,7 +213,7 @@ function [DATA,HEADERS,NICEHEADERS]=CO2SYS(PAR1,PAR2,PAR1TYPE,PAR2TYPE,SAL,TEMPI
 % 
 %**************************************************************************
 %
-% This is version 2.1 (uploaded to GitHub by J. Sharp, Aug 2018):
+% This is a modification of version 2.0 (uploaded to GitHub by J. Sharp, Aug 2018):
 %
 % **** Additional changes since 2.0
 %	- now allows for CO3 as an input parameter for calculation and for error propagation
@@ -422,19 +422,19 @@ Icase = 10*min(p1,p2) + max(p1,p2);
 F=Icase==12; % input TA, TC
 if any(F)
     [PHic(F) FCic(F)] = CalculatepHfCO2fromTATC(TAc(F)-PengCorrection(F), TCc(F));
-    CO3ic      = CalculateCO3fromTCpH(TCc(F), PHic(F));
+    CO3ic             = CalculateCO3fromTCpH   (TCc(F), PHic(F));
 end
 F=Icase==13; % input TA, pH
 if any(F)
     TCc(F)  = CalculateTCfromTApH  (TAc(F)-PengCorrection(F), PHic(F));
     FCic(F) = CalculatefCO2fromTCpH(TCc(F), PHic(F));
-    CO3ic   = CalculateCO3fromTCpH(TCc(F), PHic(F));
+    CO3ic   = CalculateCO3fromTCpH (TCc(F), PHic(F));
 end
 F=Icase==14 | Icase==15; % input TA, (pCO2 or fCO2)
 if any(F)
     PHic(F) = CalculatepHfromTAfCO2(TAc(F)-PengCorrection(F), FCic(F));
     TCc(F)  = CalculateTCfromTApH  (TAc(F)-PengCorrection(F), PHic(F));
-    CO3ic   = CalculateCO3fromTCpH(TCc(F), PHic(F));
+    CO3ic   = CalculateCO3fromTCpH (TCc(F), PHic(F));
 end
 F=Icase==16; % input TA, CO3
 if any(F)
@@ -444,14 +444,14 @@ if any(F)
 end
 F=Icase==23; % input TC, pH
 if any(F)
-    TAc(F)  = CalculateTAfromTCpH  (TCc(F), PHic(F)) + PengCorrection(F);
-    FCic(F) = CalculatefCO2fromTCpH(TCc(F), PHic(F));
+    TAc(F)  = CalculateTAfromTCpH    (TCc(F), PHic(F)) + PengCorrection(F);
+    FCic(F) = CalculatefCO2fromTCpH  (TCc(F), PHic(F));
     CO3ic      = CalculateCO3fromTCpH(TCc(F), PHic(F));
 end
 F=Icase==24 | Icase==25;  % input TC, (pCO2 or fCO2)
 if any(F)
-    PHic(F) = CalculatepHfromTCfCO2(TCc(F), FCic(F));
-    TAc(F)  = CalculateTAfromTCpH  (TCc(F), PHic(F)) + PengCorrection(F);
+    PHic(F) = CalculatepHfromTCfCO2  (TCc(F), FCic(F));
+    TAc(F)  = CalculateTAfromTCpH    (TCc(F), PHic(F)) + PengCorrection(F);
     CO3ic      = CalculateCO3fromTCpH(TCc(F), PHic(F));
 end
 F=Icase==26; % input TC, CO3
@@ -461,8 +461,8 @@ if any(F)
 end
 F=Icase==34 | Icase==35; % input pH, (pCO2 or fCO2)
 if any(F)
-    TCc(F)  = CalculateTCfrompHfCO2(PHic(F), FCic(F));
-    TAc(F)  = CalculateTAfromTCpH  (TCc(F),  PHic(F)) + PengCorrection(F);
+    TCc(F)  = CalculateTCfrompHfCO2  (PHic(F), FCic(F));
+    TAc(F)  = CalculateTAfromTCpH    (TCc(F),  PHic(F)) + PengCorrection(F);
     CO3ic      = CalculateCO3fromTCpH(TCc(F), PHic(F));
 end
 F=Icase==36; % input pH, CO3
