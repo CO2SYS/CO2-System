@@ -37,7 +37,7 @@
 %   - eS, eT         :  uncertainty of Salinity and Temperature (same units as S and T)
 %   - ePO4, eSI      :  uncertainty of Phosphate and Silicate total concentrations (same units as PO4 and SI [umol/kg])
 %   - epK            :  uncertainty of all seven dissociation constants (a vector) [pK units]
-%   - eBt            :  uncertainty of total boron, given as fractional relative error (eBt=0.01 is a 1% error)
+%   - eBt            :  uncertainty of total boron, given as fractional relative error (eBt=0.02 is a 2% error)
 %   - r              :  correlation coefficient between PAR1 AND PAR2 (typicaly 0)
 %   - others         :  same as input for subroutine  CO2SYS() : scalar or vectors
 %
@@ -104,7 +104,7 @@
 %
 %    01 - TAlk                 (umol/kgSW)
 %    02 - TCO2                 (umol/kgSW)
-%    03 - [H+] input           (umol/kgSW)
+%    03 - [H+] input           (nmol/kgSW)
 %    04 - pCO2 input           (uatm)
 %    05 - fCO2 input           (uatm)
 %    06 - HCO3 input           (umol/kgSW)
@@ -113,7 +113,7 @@
 %    09 - OmegaCa input        ()
 %    10 - OmegaAr input        ()
 %    11 - xCO2 input           (ppm)
-%    12 - [H+] output          ()
+%    12 - [H+] output          (nmol/kgSW)
 %    13 - pCO2 output          (uatm)
 %    14 - fCO2 output          (uatm)
 %    15 - HCO3 output          (umol/kgSW)
@@ -123,7 +123,7 @@
 %    19 - OmegaAr output       ()
 %    20 - xCO2 output          (ppm)
 %
-% Remark : if all input pairs are of the same type, standard error of input pairs are omitted
+%    NOTE: Uncertainties for both the input and output variables are provided.
 %
 
 function [total_error, headers, units] = ...
@@ -218,7 +218,7 @@ function [total_error, headers, units] = ...
         error ('invalid parameter eBt (must be scalar): ')
     elseif ( isscalar(eBt))
         if (eBt < 0 || eBt > 1)
-           error ('The "eBt" input argument is the fractional error. It must be between 0 and 1. Default is 0.01 (a 1% error).')
+           error ('The "eBt" input argument is the fractional error. It must be between 0 and 1. Default is 0.02 (a 2% error).')
 	end
     end
 
