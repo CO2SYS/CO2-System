@@ -1789,7 +1789,7 @@ end % end nested function
 function varargout=CalculatepHfromTACO3(TAi, CO3i)
 global K1 K2 KW KB KF KS KP1 KP2 KP3 KSi;
 global TB TF TS TP TSi F
-% ' SUB CalculatepHfromTACO3, version 01.0, 8-18, added by J. D. Sharp
+% ' SUB CalculatepHfromTACO3, version 01.0, 8-18, added by J. Sharp
 % ' Inputs: TA, CO3, K0, K(), T()
 % ' Output: pH
 % ' This calculates pH from TA and CO3 using K1 and K2 by Newton's method.
@@ -1804,7 +1804,7 @@ KSiF=KSi(F); TBF=TB(F);   KBF=KB(F);   TSF=TS(F);
 KSF=KS(F);   TFF=TF(F);   KFF=KF(F);
 vl         = sum(F); % vectorlength
 pHGuess    = 8;      % this is the first guess
-pHTol      = 0.000001; % tolerance (lower than stnd CO2SYS)
+pHTol      = 0.00001; % tolerance
 ln10       = log(10);
 pH(1:vl,1) = pHGuess;
 deltapH = pHTol+pH;
