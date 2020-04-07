@@ -1,6 +1,6 @@
 # CO2-System
 
-Software to calculate marine CO2 system variables and propagate uncertainties, unique in the ability to input carbonate ion concnetrations and uncertainties. CO2Sys was inititally developed by Lewis and Wallace (1998) for MS DOS, later adapted for MS Excel and MATLAB by Pierrot (2006). The code was vectorized, refined, and optimized for computational speed by van Heuven (2011). Options for error propagation were added recently by Orr et al. (2018). This software builds upon previous versions and differs only in its ability to handle carbonate ion concentrations and uncertainties as input parameters.
+Software to calculate marine CO2 system variables and propagate uncertainties, unique in the ability to input carbonate ion concentrations and uncertainties. CO2Sys was inititally developed by Lewis and Wallace (1998) for MS DOS, later adapted for MS Excel and MATLAB by Pierrot (2006). The code was vectorized, refined, and optimized for computational speed by van Heuven (2011). Options for error propagation were added recently by Orr et al. (2018). This software builds upon previous versions and differs only in its ability to handle carbonate ion concentrations and uncertainties as input parameters.
 
 ## Citation
 
